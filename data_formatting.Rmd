@@ -29,30 +29,77 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ***
 ### **Index**
-Different data types (long and wide…)
-  How to import data from:
+Data frames
+  Imported
     Excel
     CSV
     Text
     ..
+  Created
 
-Data types in R
+Data structure 
+  Changing data type of variable
+  Factors
+    Change level order
+    Change level names
 
-Data structure (variables)
+Useful functions
+  Filter and select
+  Change data format
+    Long to wide
+    Wide to long
+  Creating tables
 
-Change data format in R
-  Long to wide
-  Wide to long
+
+***
+### **Introduction**
+The same data can be formatted in different ways. Functions in R, that for example make plots or do statistical tests, expect your data to be in a certain format. It is therefore very important to know how your data is formatted and how it can be changed when necessary. 
+
+
+***
+### **Data frames**
+When working with data in R you will most likely work with so called data frames. Data frames have columns and rows, look a lot like excel files and are easy to work with when doing statistics. When importing your dataset from excel or another format, your data will automatically become a data frame. We will show you how to do this.
+
+**Excel file**
+
+**CSV file**
+
+**Text file**
+
+**Created**
+
+
+***
+### **Data structure and variable type**
+After creating a data frame, you need to make sure your columns or variables are in the correct data type. To do this you need to look at the data structure which you can do by clicking on the blue button of the dataset in your right upper corner, or by using the following function:
+```{r data structure}
+str(dataset)
+```
+
+There are five data types or modes that are important to know and your data frame can consist of variables of different types. 
+- Numerical ...
+- Integer ...
+- Character ...
+- Factors ...
+- Logical ...
+
+You will most likely now intuitively know which type of data these (and other0 variables should be and that they are not correct now. To change the data type of the variables you need to use the following code:
+```{r changing data type}
+dataset$sex <- factor(dataset$sex)
+dataset$age <- integer(dataset$age)
+dataset$name <- character(dataset$name)
+
+```
+
+Using as.factor etc....
+
+In case of factors, it is likley that you will once find that the order or the names of the levels make no sense. This can easily be changed.
+```{r changing levels}
+```
 
 
 ***
 
-
-https://www.statmethods.net/input/datatypes.html 
-
-The same data can be formatted in different ways. Functions in R, that for example make plots or do statistical tests, expect your data to be in a certain format. It is therefore very important to know how your data is formatted and how it can be changed when necessary. 
-
-Before working in R, you will most likely work with your data in excel. There are however also other 
 
 
 ```{r}
