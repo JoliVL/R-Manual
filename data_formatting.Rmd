@@ -26,11 +26,34 @@ h4{
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-***
 
+***
 ### **Index**
+Different data types (long and wide…)
+  How to import data from:
+    Excel
+    CSV
+    Text
+    ..
+
+Data types in R
+
+Data structure (variables)
+
+Change data format in R
+  Long to wide
+  Wide to long
+
 
 ***
+
+
+https://www.statmethods.net/input/datatypes.html 
+
+The same data can be formatted in different ways. Functions in R, that for example make plots or do statistical tests, expect your data to be in a certain format. It is therefore very important to know how your data is formatted and how it can be changed when necessary. 
+
+Before working in R, you will most likely work with your data in excel. There are however also other 
+
 
 ```{r}
 ```

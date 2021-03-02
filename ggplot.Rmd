@@ -26,10 +26,9 @@ h4{
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
 ***
-
 ### **Index**
-
 Basics
   Data
   Aesthetics
@@ -61,10 +60,7 @@ Extras
 
 
 ***
-
-
 ### **Introduction ggplot ....**
-
 To make plots ... 
 ```{r library}
 install.packages("ggplot2")
@@ -74,10 +70,9 @@ The built-in iris dataset will be used ...
 
 Table for which graph to use when ...
 
+
 ***
-
 ### **GGplot basics**
-
 To create an empty, basic plot: 
 ```{r empty plot}
 ggplot(data = iris)
@@ -87,7 +82,6 @@ You need to add so called aesthetics, with the mapping argument, you can add the
 ```{r }
 ggplot(data = iris, mapping = aes(x = Sepal.Length, y = Sepal.Width))
 ```
-
 
 This is the same and will save you some time when making a lot of plots.
 ```{r }

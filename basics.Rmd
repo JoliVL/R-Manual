@@ -26,11 +26,61 @@ h4{
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-***
 
+***
 ### **Index**
 
+
 ***
+### **Introduction**
+To make this guide accessible for every user, we will also show some very basic R. If you already have experience with R you can probably skip this part.
+
+
+***
+### **Installing R**
+R needs to be installed first. We recommend that you also install Rstudio, which is a way to use R with more user interface, so you do not have to code everything yourself but there are some built in buttons to make it easier for you. Below you will find a link to the websites you need to install R and Rstudio, along with a useful guide. Always check if you have the latest version of R.
+
+Guide 
+https://rstudio-education.github.io/hopr/starting.html 
+Installing R
+https://cran.r-project.org/bin/windows/base/ 
+Installing Rstudio
+https://rstudio.com/products/rstudio/download/ 
+
+
+***
+### **Rstudio interface**
+Console, files, ...
+
+Cheat sheet
+….
+
+
+***
+### **Updating R**
+
+
+***
+### **Basic R language**
+Below we will show you some basics of the R language, and we will refer you to a more elaborate guide. 
+
+Comments # ...
+...
+
+
+***
+### **Packages**
+R uses so called packages, which you can compare with …. These packages are usually made by other R users and they contain functions that are not a part of the base R. Before you can use a package, you need to install the package. You have to do this only once on your computer, because it will install the package to your computer. But when you use a you can use after installing and loading the package. 
+
+
+***
+### **Help**
+
+
+***
+### **Projects and working directory**
+
+
 
 ```{r}
 ```
