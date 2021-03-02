@@ -1,0 +1,36 @@
+---
+title: "Manual data formatting"
+author: "Jolinde Vlaeyen & Lise Ruitenbeek"
+output: html_document
+df_print: paged
+---
+
+<style type="text/css">
+body{
+  font-size: 12pt;
+  font-family: "Calibri";
+}
+h1.title{
+  font-size: 22pt;
+}
+h3{
+  font-size: 16pt;
+}
+h4{
+  font-size: 12pt;
+}
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+***
+
+### **Index**
+
+***
+
+```{r}
+```

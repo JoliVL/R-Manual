@@ -1,7 +1,6 @@
 ---
 title: "**Manual ggplot**"
 author: "Jolinde Vlaeyen & Lise Ruitenbeek"
-date: "15-02-2021"
 output: html_document
 df_print: paged
 ---
@@ -29,10 +28,48 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ***
 
+### **Index**
+
+Basics
+  Data
+  Aesthetics
+  Layers
+  Geometric objects
+  
+Types of variables to be plotted
+  One variable (to look at frequency distribution)
+    Numerical 
+      Histogram
+    Categorical 
+      Bar graph 
+  Two variables (to look at associations)
+    Two numerical 
+      Scatter plot
+      Line plot (space or time)
+    Two categorical 
+      Grouped bar plot
+      Mosaic plot
+    One numerical and one categorical
+      Box plot
+      Multiple histograms
+
+Extras
+  Adding and changing colour
+  Adding titles
+  Changing axis 
+  Make multiple plots at once
+
+
+***
+
+
 ### **Introduction ggplot ....**
 
 To make plots ... 
-
+```{r library}
+install.packages("ggplot2")
+library(ggplot2)
+```
 The built-in iris dataset will be used ...
 
 Table for which graph to use when ...
@@ -41,29 +78,30 @@ Table for which graph to use when ...
 
 ### **GGplot basics**
 
-With ggplot, there is a specific process to follow. It starts with a basic plot where you tell R which data to use and usually also what variable goes on the x-axis and y-axis for the plot. Then you can add so called "layers" to the plot which for example tell R to make a bargraph or tell R to use another title. 
-
-```{r data, echo=FALSE}
-library(ggplot2)
-data("iris")
-
+To create an empty, basic plot: 
+```{r empty plot}
+ggplot(data = iris)
 ```
 
-```{r ggplot basics, results="hide}
-# This is an empty plot, it will not yet know how to plot the data.
-ggplot(data = iris)
-
-# You need to add so called aesthetics, with the mapping argument, you can add the variable you want on the x-axis and y-axis, but we will later see that there are much more aesthetics you can add such as colour.
+You need to add so called aesthetics, with the mapping argument, you can add the variable you want on the x-axis and y-axis, but we will later see that there are much more aesthetics you can add such as colour.
+```{r }
 ggplot(data = iris, mapping = aes(x = Sepal.Length, y = Sepal.Width))
+```
 
-# This is the same and will save you some time when making a lot of plots.
+
+This is the same and will save you some time when making a lot of plots.
+```{r }
 ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width))
+```
 
-# The above codes will however still only make an empty graph because R does not now how to represent the data points of the variables. You will need to add a so called geometric object such as geom_point() to make a scatterplot or geom_bar() to make a bargraph. This is called adding a layer, and has to be done by using the +. We will first show a scatterplot example with different possibilities and will later show how to make any other types of plots.
+The above codes will however still only make an empty graph because R does not know how to represent the data points of the variables. You will need to add a so called geometric object such as geom_point() to make a scatterplot or geom_bar() to make a bar graph. This is called adding a layer, and has to be done by using the +. We will first show a scatter plot example with different possibilities and will later show how to make any other types of plots.
+```{r }
 ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width)) + geom_point()
+```
 
-
-
+You can also add the aesthetics in the geometric object, and in the case below it will give you the same output. In some cases however it may prove useful to put other aesthetics to the geometric objects than you have already used in the ggplot(), for example when you want to add a prediction line. 
+```{r }
+ggplot(iris) + geom_point(aes(x = Sepal.Length, y = Sepal.Width))
 ```
 
 
