@@ -65,16 +65,37 @@ Cheat sheet
 Below we will show you some basics of the R language, and we will refer you to a more elaborate guide. 
 
 Comments # ...
-...
+<- and = 
 
 
 ***
 ### **Packages**
-R uses so called packages, which you can compare with …. These packages are usually made by other R users and they contain functions that are not a part of the base R. Before you can use a package, you need to install the package. You have to do this only once on your computer, because it will install the package to your computer. But when you use a you can use after installing and loading the package. 
+R uses so called packages, which you can compare with …. These packages are usually made by other R users and they contain functions that are not a part of the base R. Before you can use a package, you need to install the package. You have to do this only once on your computer, because it will install the package to your computer. But when you use a different computer or when R was removed from your computer, remember to install the package again. Below you will see how to install the ggplot2 package. When you will use your R file on different computers, it can be useful to put the installing function for the packages as a comment.
+```{r install packages, eval=FALSE}
+install.packages("ggplot2")
+
+#install.packages("ggplot2")
+```
+
+After the package has been installed, you need to load the package every time you use R after it has been closed. Usually, people put the code to load all the packages they need at the top of their R file.
+```{r load packages, eval=FALSE}
+library(ggplot2)
+```
+
+You may have noticed that the install.packages() function requires the name of the package to be between quotation marks and the library() function does not. Remember this, as this is pretty confusing and can therefor easily cause errors.
+
+In Rstudio you can furthermore look at the packages you have installed and loaded on your computer by clicking on the "Packages" button on top of the bottom right part... Here you can also install and update packages.
 
 
 ***
 ### **Help**
+When you are stuck or do not know how to use a specific function, the first thing you can try is get help from R. You can do this two ways:
+```{r getting help, eval=FALSE}
+?library
+help(library)
+```
+
+You will get some information about this function (in this case the library function we used to load the packages) in the bottom right of your screen. The information may be limited but can help you with small things such as whether or not to use quotation marks in the function. 
 
 
 ***
