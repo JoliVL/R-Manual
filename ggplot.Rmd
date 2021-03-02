@@ -1,0 +1,69 @@
+---
+title: "**Manual ggplot**"
+author: "Jolinde Vlaeyen & Lise Ruitenbeek"
+date: "15-02-2021"
+output: html_document
+df_print: paged
+---
+
+<style type="text/css">
+body{
+  font-size: 12pt;
+  font-family: "Calibri";
+}
+h1.title{
+  font-size: 22pt;
+}
+h3{
+  font-size: 16pt;
+}
+h4{
+  font-size: 12pt;
+}
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+***
+
+### **Introduction ggplot ....**
+
+To make plots ... 
+
+The built-in iris dataset will be used ...
+
+Table for which graph to use when ...
+
+***
+
+### **GGplot basics**
+
+With ggplot, there is a specific process to follow. It starts with a basic plot where you tell R which data to use and usually also what variable goes on the x-axis and y-axis for the plot. Then you can add so called "layers" to the plot which for example tell R to make a bargraph or tell R to use another title. 
+
+```{r data, echo=FALSE}
+library(ggplot2)
+data("iris")
+
+```
+
+```{r ggplot basics, results="hide}
+# This is an empty plot, it will not yet know how to plot the data.
+ggplot(data = iris)
+
+# You need to add so called aesthetics, with the mapping argument, you can add the variable you want on the x-axis and y-axis, but we will later see that there are much more aesthetics you can add such as colour.
+ggplot(data = iris, mapping = aes(x = Sepal.Length, y = Sepal.Width))
+
+# This is the same and will save you some time when making a lot of plots.
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width))
+
+# The above codes will however still only make an empty graph because R does not now how to represent the data points of the variables. You will need to add a so called geometric object such as geom_point() to make a scatterplot or geom_bar() to make a bargraph. This is called adding a layer, and has to be done by using the +. We will first show a scatterplot example with different possibilities and will later show how to make any other types of plots.
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width)) + geom_point()
+
+
+
+```
+
+
