@@ -45,6 +45,7 @@ Data structure
 
 Useful functions
   Filter and select
+    Missing values
   Change data format
     Long to wide
     Wide to long
@@ -58,22 +59,74 @@ The same data can be formatted in different ways. Functions in R, that for examp
 
 ***
 ### **Data frames**
-When working with data in R you will most likely work with so called data frames. Data frames have columns and rows, look a lot like excel files and are easy to work with when doing statistics. When importing your dataset from excel or another format, your data will automatically become a data frame. We will show you how to do this.
+When working with data in R you will most likely work with so called data frames. Data frames have columns and rows, look a lot like excel files and are easy to work with when doing statistics. When importing your dataset from excel or another format, your data will automatically become a data frame. We will show you how to do this with a hypothetical dataset. 
 
 **Excel file**
+Most likely, your dataset will be an excel file. You can use the Rstudio button in the upper right corner that says "Import Dataset", or you can use the R code. 
+
+*With the code*
+When you want to import the file "example_data.xlsx" that is in your current working directory folder:
+```{r import excel data 1}
+#install.packages("readxl")
+library(readxl)
+example_data <- read_excel("example_data.xlsx")
+```
+```{r show data, echo=FALSE}
+# Should be made prettier!!!!
+example_data
+```
+If this data is in another folder on your computer you have to tell R where it is:
+```{r import excel data 2, eval=FALSE}
+example_data <- read_excel("C:/Users/MyComputer/Documents/Statistics/example_data.xlsx")
+```
+You can look at your data by using the View() (yes with a capital V) function. But be aware that if you use Rmarkdown, using the View() function will cause problems! You can also use the head() or tail() function to look at the first and last rows of your data.
+
+*With the button*
+- Chose "From Excel..."
+- Click on the "Browse..." button on the right 
+- Chose the excel file you want to import
+- You can change the name on the bottom left
+- Look at the preview 
+- If R uses the wrong sheet, select the correct one
+- You can fill in something (for example the word "missing value") that R should treat as missing value (NA)
+- If your first row does not contain the names of your columns, deselect the "First Row as Names" box
+- In the previes you can also select the column name and change its data type, we will explain this later (see ...)
+- On the bottom right, you see the code R uses to import this data, it is useful to copy this to put in your R file
 
 **CSV file**
 
 **Text file**
 
 **Created**
+There is also a function you can use to create a data frame from for example a table. We will show you how you can make the first 6 rows of the example_data in R, in two ways. This is however much less convenient than just importing the data, but you may need to use these methods sometime.
+
+*First way*
+You first create all the columns using the c() function that creates so called vectors. Then you use the cbind() function that combines the columns. This looks like a data frame but it is not, you still need to uses the data.frame() function to be able to use it as a data frame (which comes with some special convenient functions).
+```{r create data frame 1}
+observation <- 1:6
+# Each day there are 3 observations so each day has three rows, you tell R to repeat the number 1 three times etc. and combine it into a vector.
+day <- c(rep(1,3), rep(2,3))
+# The times need to be between "". 
+time <- c("9.00-10.00", "10.00-11.00", "11.00-12.00", "9.00-10.00", "10.00-11.00", "11.00-12.00")
+individual <- c("A", "B", "C", "B", "C", "A")
+sex <- c("male", "female", "male", "female", "male", "male")
+grooming_seconds <- c(2891, 1233, 44, 215, 742, 126)
+scratching_count <- c(30, 124, 24, 8, 6, 44)
+
+example_columns <- cbind(observation, day, time, individual, sex, grooming_seconds, scratching_count)
+
+example_columns
+
+example_data_1 <- data.frame(example_columns)
+
+```
 
 
 ***
 ### **Data structure and variable type**
 After creating a data frame, you need to make sure your columns or variables are in the correct data type. To do this you need to look at the data structure which you can do by clicking on the blue button of the dataset in your right upper corner, or by using the following function:
 ```{r data structure}
-str(dataset)
+str(example_data)
 ```
 
 There are five data types or modes that are important to know and your data frame can consist of variables of different types. 
@@ -84,7 +137,7 @@ There are five data types or modes that are important to know and your data fram
 - Logical ...
 
 You will most likely now intuitively know which type of data these (and other0 variables should be and that they are not correct now. To change the data type of the variables you need to use the following code:
-```{r changing data type}
+```{r changing data type, eval=FALSE}
 dataset$sex <- factor(dataset$sex)
 dataset$age <- integer(dataset$age)
 dataset$name <- character(dataset$name)
