@@ -182,8 +182,10 @@ When working with data frames, and changing the structure, it is possible that s
 
 
 ***
+### **Useful functions**
+After importing our data, it is often not exactly how we need it to be for making figures or performing statistical tests. Instead of going back to excel and making changes there, there are also a lot of things we can do within R itself. Doing it in R can be more convenient, once you of course know how to do it. We will show you some scenarios of things you might want or need to change or do with your data and give you an example code on how to do it.
 
-
+**Selecting**
 
 ```{r}
 ```
