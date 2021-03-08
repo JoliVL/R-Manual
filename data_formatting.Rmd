@@ -44,12 +44,19 @@ Data structure
     Change level names
 
 Useful functions
-  Filter and select
-    Missing values
-  Change data format
-    Long to wide
-    Wide to long
-  Creating tables
+
+Changing data frame format
+  Long to wide
+  Wide to long
+
+Changes withing the data frame
+  Column names
+  Removing and changing values
+
+Calculations
+  Counts
+  Frequencies
+  Mean
 
 
 ***
@@ -185,7 +192,44 @@ When working with data frames, and changing the structure, it is possible that s
 ### **Useful functions**
 After importing our data, it is often not exactly how we need it to be for making figures or performing statistical tests. Instead of going back to excel and making changes there, there are also a lot of things we can do within R itself. Doing it in R can be more convenient, once you of course know how to do it. We will show you some scenarios of things you might want or need to change or do with your data and give you an example code on how to do it.
 
-**Selecting**
+
+***
+###**Data format**
+Your data can be in long (also called narrow) format or in short (also called wide) format. To know more about what this means, check this link: .... We will give you an example of a long and short dataset and show you how to change it from long to short and from short to long. This can be done with the melt() and dcast() functions of the reshape2 package. We will use imaginary data from animals that have been weighed 2 times, one time before a diet, the control condition, and one time after that diet, the treatment condition.
+
+**From short to long**
+```{r short to long}
+short_data <- read_excel("example_data.xlsx", sheet = "short")
+short_data
+
+#install.packages("reshape2")
+library(reshape2)
+
+long_data <- melt(short_data, measure.vars = c("control", "treatment"),
+                  value.name = "weight",
+                  variable.name = "condition")
+long_data
+```
+
+**From long to short**
+```{r long to short}
+short_data <- dcast(long_data, individual + sex ~ condition, 
+                    value.var = "weight")
+
+short_data
+```
+
+
+***
+###**Changes within the data frame**
+**Column names**
+To change the names of your columns (they now all start with a capital):
+```{r change column names, eval=FALSE}
+colnames(example_data) <- c("Observation", "Day", "Time", "Individual", "Sex", "Grooming_seconds", "Scratching_count")
+```
+
+**Removing and changing values**
+
 
 ```{r}
 ```
