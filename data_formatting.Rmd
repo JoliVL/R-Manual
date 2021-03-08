@@ -64,7 +64,7 @@ When working with data in R you will most likely work with so called data frames
 **Excel file**
 Most likely, your dataset will be an excel file. You can use the Rstudio button in the upper right corner that says "Import Dataset", or you can use the R code. 
 
-*With the code*
+*With code*
 When you want to import the file "example_data.xlsx" that is in your current working directory folder:
 ```{r import excel data 1}
 #install.packages("readxl")
@@ -175,10 +175,10 @@ Another thing you might want to do with factors is change the order of the level
 ```{r changing level order, eval=FALSE}
 example_data$education <- factor(example_data$education, levels = c("low", "medium", "high")) 
 ```
-Note that the "as." function does not work with the "levels =".
+Note that the "as." function does not work with the "levels =". Also make sure you use the correct level name, it will only recognize the names of the levels, so when making a typing error, it will go wrong.
 **Misschien dan toch niet aanraden dat te gebruiken....**
 
-When working with data frames, and changing the structure, it is possible that some things go wrong and your data does not make much sense any more, or that you get an error. Our advice is to check the structure of the data all the time, to make sure all the variables are in the correct data type. Also, it may help to re-import your data, so that any made mistakes will be reversed. You should of course not forget to again change the data types of the variables when needed, which is of course impossible to forget when you check your data structure all the time.
+When working with data frames, and changing the structure, it is possible that some things go wrong and your data does not make much sense any more, or that you get an error. **Our advice is to check the structure of the data all the time**, to make sure all the variables are in the correct data type. Also, it may help to re-import your data, so that any made mistakes will be reversed. You should of course not forget to again change the data types of the variables when needed, which is of course impossible to forget when you check your data structure all the time.
 
 
 ***
