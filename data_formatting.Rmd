@@ -81,7 +81,7 @@ example_data <- read_excel("C:/Users/MyComputer/Documents/Statistics/example_dat
 ```
 You can look at your data by using the View() (yes with a capital V) function. But be aware that if you use Rmarkdown, using the View() function will cause problems! You can also use the head() or tail() function to look at the first and last rows of your data.
 
-*With the button*
+*With the button --> check if you need to install something before (I think so...)*
 - Chose "From Excel..."
 - Click on the "Browse..." button on the right 
 - Chose the excel file you want to import
@@ -98,9 +98,8 @@ You can look at your data by using the View() (yes with a capital V) function. B
 **Text file**
 
 **Created**
-There is also a function you can use to create a data frame from for example a table. We will show you how you can make the first 6 rows of the example_data in R, in two ways. This is however much less convenient than just importing the data, but you may need to use these methods sometime.
+There is also a function you can use to create a data frame from for example a table. We will show you how you can make the first 6 rows of the example_data in R. This is however much less convenient than just importing the data, but you may need to use these methods sometime.
 
-*First way*
 You first create all the columns using the c() function that creates so called vectors. Then you use the cbind() function that combines the columns. This looks like a data frame but it is not, you still need to uses the data.frame() function to be able to use it as a data frame (which comes with some special convenient functions).
 ```{r create data frame 1}
 observation <- 1:6
@@ -121,6 +120,8 @@ example_data_1 <- data.frame(example_columns)
 
 ```
 
+It is furthermore also possible to use rbind() in stead of cbind(), which will bind vectors together as rows instead of as columns.
+
 
 ***
 ### **Data structure and variable type**
@@ -129,26 +130,55 @@ After creating a data frame, you need to make sure your columns or variables are
 str(example_data)
 ```
 
-There are five data types or modes that are important to know and your data frame can consist of variables of different types. 
-- Numerical ...
-- Integer ...
-- Character ...
-- Factors ...
-- Logical ...
+There are five data types or modes that are important to know. Your data frame can consist of variables (columns) of different types. 
+- Numeric: these are numbers, possibly with decimals. Example variable: height.
+- Integer: these are numbers, without decimals. Example variable: number of children.
+- Character: this is text, and you need to use "" around that text. Example variable: individual names. Note that when you put numbers between "", they will also become characters.
+- Factors: this is usually used for a categorical variable, and is used when there are a limited number of unique characters. These unique characters are called the has levels and can be thought of as the groups of a category. Example variable: gender, which can only be male or female. It can for example also be the variable that contains the group that individuals belong to, for example 1, 2 and 3. By making it a factor it allows you to compare between these groups.
+- Logical: a variable with only the values TRUE and FALSE. Example variable: .....
 
-You will most likely now intuitively know which type of data these (and other0 variables should be and that they are not correct now. To change the data type of the variables you need to use the following code:
+Depending on what you want to do in your analysis, your variables can take different forms. The variable age can for example be numeric, when you have the exact age, possibly with decimals. It can also be integer, when you do not want there to be decimals. Furthermore, when you age is in a range, for example "20-30", "30-40" etc., it can also be a character variable or a factor variable. Think about how R needs to interpret each of your variables. 
+
+When importing your data, R might not always have the data types of your variables right. To change the data type of the variables you need to use the following code:
 ```{r changing data type, eval=FALSE}
-dataset$sex <- factor(dataset$sex)
-dataset$age <- integer(dataset$age)
-dataset$name <- character(dataset$name)
+# Changing to numeric
+example_data$grooming_seconds <- as.numeric(example_data$grooming_seconds)
 
+# Changing to integer
+example_data$scratching_count <- as.integer(example_data$scratching_count)
+
+# Changing to character
+example_data$individual <- as.character(example_data$individual)
+# Note that if we would like to compare between individuals, we would need to make this variable a factor.
+
+# Changing to factor
+example_data$sex <- as.factor(example_data$sex)
+
+# Changing to logical
+example_data$sex <- as.logical(example_data$sex)
+# Better example!!!!!!!!
 ```
 
-Using as.factor etc....
+The dollar sign is a very useful tool when working with data frames. It allows you to specify the column/variable you want from a data frame. When changing the data type of a variable, you need to make sure that you change in within the data frame. If you do this: "sex <- as.factor(example_data$sex)" you will create a new variable sex that contains the example_data sex variable as a factor. But the variable sex within the data frame will not have changed. 
 
-In case of factors, it is likley that you will once find that the order or the names of the levels make no sense. This can easily be changed.
-```{r changing levels}
+The use of the "as." is not always necessary. It will most likely also work when you just say factor() or numeric(). In some cases however, you will find that it does not work without the "as.", so our advice is to always use it, or know that when it does not work, you can try the "as." function.
+
+Factors are a very useful variable type, because as mentioned, it allows you to compare groups, in statistical tests and in figures as well. They can however also present some extra challenges, and below we will give the codes on how to tackle those.
+
+You might for example want to change the name of the levels of a factor. For example, when you have a factor sex, with levels "female" and "male" you want that to be "Female and "Male", so it will look better in the figures, you can use the following code:
+```{r changing level names, eval=FALSE}
+levels(example_data$sex) <- c("Female", "Male")
 ```
+Note that it is important that you look at the order of the levels. With the str() function you will see what the order is (normally alphabetic). In this case the first level would be "female" and the second level would be "male". When changing the names you need to first change the name of the "female" and then of the "male". R does not know that the female and Female are basically the same, and that it is only logical to change female to Female and not to Male.
+
+Another thing you might want to do with factors is change the order of the levels. As mentioned, R automatically uses an alphabetic order when changing a variable to a factor. This may not always make sense. Imagine for example that you have the variable day, that has the levels "low", "medium" and "high". The order R will put the levels in would be "high", "low" and "medium". This will not be very nice in a figure as people intuitively feel that it should go from low to higher education. You can change the order of the levels with the following code:
+```{r changing level order, eval=FALSE}
+example_data$education <- factor(example_data$education, levels = c("low", "medium", "high")) 
+```
+Note that the "as." function does not work with the "levels =".
+**Misschien dan toch niet aanraden dat te gebruiken....**
+
+When working with data frames, and changing the structure, it is possible that some things go wrong and your data does not make much sense any more, or that you get an error. Our advice is to check the structure of the data all the time, to make sure all the variables are in the correct data type. Also, it may help to re-import your data, so that any made mistakes will be reversed. You should of course not forget to again change the data types of the variables when needed, which is of course impossible to forget when you check your data structure all the time.
 
 
 ***
