@@ -51,7 +51,9 @@ Changing data frame format
 
 Changes withing the data frame
   Column names
-  Removing and changing values
+  Adding columns
+  Changing values
+  Handling missing values
 
 Calculations
   Counts
@@ -136,6 +138,27 @@ After creating a data frame, you need to make sure your columns or variables are
 ```{r data structure}
 str(example_data)
 ```
+
+You can select rows and columns:
+```{r selecting rows and columns}
+# Select the first column
+example_data$observation
+
+# Other way to select the first column
+example_data[1]
+# Or
+example_data[,1]
+
+# Select a row
+example_data[1,]
+
+# Select a row and a column
+example_data[1,1]
+
+# To select multiple rows and columns, the first 5 rows and the first 5 columns
+example_data[1:5, 1:5]
+```
+
 
 There are five data types or modes that are important to know. Your data frame can consist of variables (columns) of different types. 
 - Numeric: these are numbers, possibly with decimals. Example variable: height.
@@ -228,8 +251,48 @@ To change the names of your columns (they now all start with a capital):
 colnames(example_data) <- c("Observation", "Day", "Time", "Individual", "Sex", "Grooming_seconds", "Scratching_count")
 ```
 
-**Removing and changing values**
+**Adding and removing columns (and rows??)**
+To add a column, ....
+```{r adding and removing a column, eval=FALSE}
+# To add a column 
+example_data$new_column <- c(rep(1,18))
 
-
-```{r}
+# To remove a column
+example_data$new_column <- NULL
 ```
+
+
+**Changing values**
+Change value in a column. Let's say that we want to change the individual letter into their real names. We can easily do this in R using the "dplyr" package.
+```{r change value in column, eval=FALSE}
+library(dplyr)
+
+# In the same column
+example_data$individual <- recode(example_data$individual, "A" = "Ari", "B" = "Bibi", "C" = "Coco")
+
+# We can also create a new column called names, with the names and leave the "individual" column in tact.
+example_data$name <- recode(example_data$individual, "A" = "Ari", "B" = "Bibi", "C" = "Coco")
+```
+
+Creating groups/ranges. Imagine we have a dataset with observation from a lot of different years from 1990 until 2010. For a figure we might want to make a range from all those years. This can easily be done in R using mutate() an ifelse() from the package dlpyr.
+```{r creating groups/ranges, eval=FALSE}
+# Create 2 groups (in a new column), 1990-2000 and 2001-2010
+year_data <- mutate(year_data, year_group = ifelse(year >= 1990 & year <= 2000, "1990-2000", "2001-2010"))
+
+# EXPLAIN
+
+# When we want to create more than 2 groups, we have to use the ifelse() in the else section of the previous ifelse. For example if the groups are 1990-1995; 1996-2000; 2001-2005; 2006-2010
+
+year_data <- mutate(year_data, year_group = ifelse(year >= 1990 & year <= 1995, "1990-1995", ifelse(year >= 1996 & year <= 2000, "1996-2000", ifelse(year >= 2001 & year <= 2005, "2001-2005", "2006-2010"))))
+
+# CHECKEN
+```
+
+**Handling missing values**
+
+
+***
+###**Calculations**
+Counts
+Frequencies
+Mean
