@@ -55,6 +55,7 @@ Types of variables to be plotted
 Extras
   Adding and changing colour
   Adding titles
+  Changing theme's
   Changing axis 
   Make multiple plots at once
 
@@ -63,39 +64,100 @@ Extras
 ### **Introduction ggplot ....**
 To make plots ... 
 ```{r library}
-install.packages("ggplot2")
+#install.packages("ggplot2")
 library(ggplot2)
 ```
 The built-in iris dataset will be used ...
 
 Table for which graph to use when ...
 
+```{r data}
+library(readxl)
+example_data <- read_excel("example_data.xlsx")
+
+example_data$sex <- factor(example_data$sex)
+example_data$individual <- factor(example_data$individual)
+```
 
 ***
 ### **GGplot basics**
 To create an empty, basic plot: 
 ```{r empty plot}
-ggplot(data = iris)
+ggplot(data = example_data)
 ```
 
 You need to add so called aesthetics, with the mapping argument, you can add the variable you want on the x-axis and y-axis, but we will later see that there are much more aesthetics you can add such as colour.
 ```{r }
-ggplot(data = iris, mapping = aes(x = Sepal.Length, y = Sepal.Width))
+ggplot(data = example_data, mapping = aes(x = observation, y = grooming_seconds))
 ```
 
 This is the same and will save you some time when making a lot of plots.
 ```{r }
-ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width))
+ggplot(example_data, aes(x = observation, y = grooming_seconds))
 ```
 
 The above codes will however still only make an empty graph because R does not know how to represent the data points of the variables. You will need to add a so called geometric object such as geom_point() to make a scatterplot or geom_bar() to make a bar graph. This is called adding a layer, and has to be done by using the +. We will first show a scatter plot example with different possibilities and will later show how to make any other types of plots.
 ```{r }
-ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width)) + geom_point()
+ggplot(example_data, aes(x = observation, y = grooming_seconds)) + geom_point()
 ```
 
 You can also add the aesthetics in the geometric object, and in the case below it will give you the same output. In some cases however it may prove useful to put other aesthetics to the geometric objects than you have already used in the ggplot(), for example when you want to add a prediction line. 
 ```{r }
-ggplot(iris) + geom_point(aes(x = Sepal.Length, y = Sepal.Width))
+ggplot(example_data) + geom_point(aes(x = observation, y = grooming_seconds))
 ```
+
+
+***
+###**Types of variables to be plotted**
+
+**Histogram**
+```{r histogram}
+ggplot(example_data, aes(x = scratching_count)) + geom_histogram(binwidth = 10)
+```
+You will most likely have to change the binwidth ...
+
+
+**Bar graph**
+```{r bar graph}
+ggplot(example_data, aes(x = individual)) + geom_bar()
+```
+
+**Scatter plot**
+```{r scatter plot}
+```
+**Line plot (space or time)**
+```{r line plot}
+ggplot(example_data, aes(x = observation, y = scratching_count)) + geom_line()
+```
+
+**Grouped bar plot**
+To make a grouped bar plot, we need to use an extra layer, which is called faceting. DIT IS GEEN LOGISCH VOORBEELD 
+```{r grouped bar plot}
+ggplot(example_data, aes(x = individual)) + geom_bar() + facet_wrap(~sex)
+
+```
+**Mosaic plot**
+```{r mosaic plot}
+
+```
+
+**Box plot**
+```{r boxplot}
+
+```
+**Multiple histograms**
+```{r multiple histogram}
+```
+
+
+***
+###**Extra's**
+**Adding and changing colour**
+
+
+Adding titles
+Changing theme's
+Changing axis 
+Make multiple plots at once
 
 
