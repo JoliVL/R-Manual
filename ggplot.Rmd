@@ -54,6 +54,7 @@ Types of variables to be plotted
 
 Extras
   Adding and changing colour
+  Shape, size and transparency
   Adding titles
   Changing theme's
   Changing axis 
@@ -87,22 +88,22 @@ ggplot(data = example_data)
 ```
 
 You need to add so called aesthetics, with the mapping argument, you can add the variable you want on the x-axis and y-axis, but we will later see that there are much more aesthetics you can add such as colour.
-```{r }
+```{r plot 1}
 ggplot(data = example_data, mapping = aes(x = observation, y = grooming_seconds))
 ```
 
 This is the same and will save you some time when making a lot of plots.
-```{r }
+```{r plot 2}
 ggplot(example_data, aes(x = observation, y = grooming_seconds))
 ```
 
 The above codes will however still only make an empty graph because R does not know how to represent the data points of the variables. You will need to add a so called geometric object such as geom_point() to make a scatterplot or geom_bar() to make a bar graph. This is called adding a layer, and has to be done by using the +. We will first show a scatter plot example with different possibilities and will later show how to make any other types of plots.
-```{r }
+```{r plot 3}
 ggplot(example_data, aes(x = observation, y = grooming_seconds)) + geom_point()
 ```
 
 You can also add the aesthetics in the geometric object, and in the case below it will give you the same output. In some cases however it may prove useful to put other aesthetics to the geometric objects than you have already used in the ggplot(), for example when you want to add a prediction line. 
-```{r }
+```{r plot 4}
 ggplot(example_data) + geom_point(aes(x = observation, y = grooming_seconds))
 ```
 
@@ -153,11 +154,65 @@ ggplot(example_data, aes(x = individual)) + geom_bar() + facet_wrap(~sex)
 ***
 ###**Extra's**
 **Adding and changing colour**
+```{r colour}
+ggplot(example_data, aes(x = observation, y = grooming_seconds, color = individual)) + geom_point()
+```
+
+When adding colour to a bargraph, you most likely will need to use the "fill" statement in stead of the "color" statement. See the difference:
+```{r colour bargraph}
+ggplot(example_data, aes(x = individual, color = individual)) + geom_bar()
+
+ggplot(example_data, aes(x = individual, fill = individual)) + geom_bar()
+
+```
+
+R gives your graph a standard colour, but you can easily change this. When you want all your points to have the same (but different than the standard) colour, you can do this:
+```{r change color}
+ggplot(example_data, aes(x = observation, y = grooming_seconds)) + geom_point(color = "blue")
+```
+Note that this "color" statement has to be within the geom and without the aes(). You can use any existing colour from by name or by code. See the following link for all colour name codes...
+
+There are futhermore two ways to change the colour of different groups in your graph. The first one is to chose a palette, from the link below ... . You can then add the following to your code:
+```{r colour palette}
+ggplot(example_data, aes(x = observation, y = grooming_seconds, color = individual)) + geom_point() + scale_color_brewer(palette = "Dark2")
+```
+When you do this for a bargraph and you used the "fill" statement in stead of the "color" statement, you should use:
+```{r fill palette}
+ggplot(example_data, aes(x = individual, fill = individual)) + geom_bar() + scale_fill_brewer(palette = "Dark2")
+```
+
+The second way to change the colours of your graph is to do this manually. For this you need to look up the colour names or codes (see link....). Instead of using "scale_color_brewer()" or "scale_fill_brewer()", you will now have to use "scale_color_manual()" or "scale_fill_manual()".
+```{r color manual}
+ggplot(example_data, aes(x = observation, y = grooming_seconds, color = individual)) + geom_point() + scale_color_manual(values = c("#999999", "#E69F00", "#56B4E9"))
+```
+
+```{r fill manual}
+ggplot(example_data, aes(x = individual, fill = individual)) + geom_bar() + scale_fill_manual(values = c("red", "green", "blue"))
+```
+As you can see, you can use the colour code or the colour name.
 
 
-Adding titles
-Changing theme's
-Changing axis 
-Make multiple plots at once
+**Shape, size and transparency**
+Besides changing the colour, it is also possible to change the shape, size and transparency of your figure to make it more understandable. 
+First, changing the shape, size or transparency of your points in a scatterplot can have a similar effect as colour can have:
+```{r shape}
+ggplot(example_data, aes(x = observation, y = grooming_seconds, shape = individual)) + geom_point()
+```
+```{r size}
+ggplot(example_data, aes(x = observation, y = grooming_seconds, size = individual)) + geom_point()
+```
+```{r trans}
+ggplot(example_data, aes(x = observation, y = grooming_seconds, alpha = individual)) + geom_point()
+```
+Size and transparency can also be used for numerical variables which gives it an extra advantage. 
+
+Next to using shape, size and transparency for differnt groups, you can also manually change these in your plot. 
+
+
+
+**Adding titles**
+**Changing theme's**
+**Changing axis** 
+**Make multiple plots at once**
 
 
