@@ -122,6 +122,7 @@ You will most likely have to change the binwidth ...
 ```{r bar graph}
 ggplot(example_data, aes(x = individual)) + geom_bar()
 ```
+STACKED .....
 
 **Scatter plot**
 ```{r scatter plot}
@@ -194,23 +195,49 @@ As you can see, you can use the colour code or the colour name.
 
 **Shape, size and transparency**
 Besides changing the colour, it is also possible to change the shape, size and transparency of your figure to make it more understandable. 
-First, changing the shape, size or transparency of your points in a scatterplot can have a similar effect as colour can have:
+
+Like colour, you can also manually change shape, size and transparency of all your points in your plot. Maybe you want squares instead of points in your scatterplot. You can check all possible shapes in the link below...
 ```{r shape}
+ggplot(example_data, aes(x = observation, y = grooming_seconds)) + geom_point(shape = 0)
+```
+
+You can also for example increase the size of your points when there are only a few. 
+```{r size}
+ggplot(example_data, aes(x = observation, y = grooming_seconds)) + geom_point(size = 5)
+```
+
+Or you can increase the transparency when there are a lot of points clustered together. ANDER VOORBEELD
+```{r trans}
+ggplot(example_data, aes(x = observation, y = grooming_seconds)) + geom_point(alpha = 0.1)
+```
+
+Furthermore, changing the shape, size or transparency of your points in a scatterplot can have a similar effect as colour when it is used for different groups:
+```{r shape 2}
 ggplot(example_data, aes(x = observation, y = grooming_seconds, shape = individual)) + geom_point()
 ```
-```{r size}
+```{r size 2}
 ggplot(example_data, aes(x = observation, y = grooming_seconds, size = individual)) + geom_point()
 ```
-```{r trans}
+```{r trans 2}
 ggplot(example_data, aes(x = observation, y = grooming_seconds, alpha = individual)) + geom_point()
 ```
 Size and transparency can also be used for numerical variables which gives it an extra advantage. 
 
-Next to using shape, size and transparency for differnt groups, you can also manually change these in your plot. 
-
+R again gives your groups a standard shape, size and transparency but again this can easily be changed. 
+```{r shape 3}
+ggplot(example_data, aes(x = observation, y = grooming_seconds, shape = individual)) + geom_point() + scale_shape_manual(values = c(3, 6, 12))
+```
+```{r size 3}
+ggplot(example_data, aes(x = observation, y = grooming_seconds, size = individual)) + geom_point() + scale_size_manual(values = c(2,7,10))
+```
+```{r trans 3}
+ggplot(example_data, aes(x = observation, y = grooming_seconds, alpha = individual)) + geom_point() + scale_alpha_manual(values = c(0.8, 0.5, 0.1))
+```
 
 
 **Adding titles**
+
+
 **Changing theme's**
 **Changing axis** 
 **Make multiple plots at once**
